@@ -8,7 +8,7 @@ export const SocketProvider = ({ children, user }) => {
 
   useEffect(() => {
     if (!user) return;
-    const s = io('http://localhost:5000', {
+    const s = io('https://chat-app-lc2w.onrender.com', {
       auth: { userId: user.id, username: user.username },
       reconnection: true,
       reconnectionAttempts: 5,

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const API = 'https://chat-app-lc2w.onrender.com';
+
 export default function Login() {
   const [isRegister, setIsRegister] = useState(false);
   const [form, setForm] = useState({ username: '', email: '', password: '' });
@@ -11,8 +13,8 @@ export default function Login() {
   const handleSubmit = async () => {
     try {
       const url = isRegister
-        ? 'http://localhost:5000/api/auth/register'
-        : 'http://localhost:5000/api/auth/login';
+        ? `${API}/api/auth/register`
+        : `${API}/api/auth/login`;
       const { data } = await axios.post(url, form);
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));

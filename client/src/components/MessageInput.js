@@ -44,7 +44,7 @@ export default function MessageInput({ selectedRoom }) {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      const { data } = await axios.post('http://localhost:5000/api/upload',
+      const { data } = await axios.post('https://chat-app-lc2w.onrender.com/api/upload',
         formData,
         { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' } }
       );

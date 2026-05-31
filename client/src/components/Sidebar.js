@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSocket } from '../context/SocketContext';
+const API = 'https://chat-app-lc2w.onrender.com';
 
 export default function Sidebar({ selectedRoom, setSelectedRoom }) {
   const [rooms, setRooms] = useState([]);
@@ -41,7 +42,7 @@ export default function Sidebar({ selectedRoom, setSelectedRoom }) {
   }, [socket, selectedRoom]);
 
   const fetchRooms = async () => {
-    const { data } = await axios.get('http://localhost:5000/api/rooms', {
+    const { data } = await axios.get('https://chat-app-lc2w.onrender.com/api/rooms', {
       headers: { Authorization: `Bearer ${token}` }
     });
     setRooms(data);
@@ -50,7 +51,7 @@ export default function Sidebar({ selectedRoom, setSelectedRoom }) {
   const createRoom = async () => {
     if (!newRoom.trim()) return;
     try {
-      const { data } = await axios.post('http://localhost:5000/api/rooms',
+      const { data } = await axios.post('https://chat-app-lc2w.onrender.com/api/rooms',
         { name: newRoom, isPrivate, password: roomPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -69,7 +70,7 @@ export default function Sidebar({ selectedRoom, setSelectedRoom }) {
     try {
       // Try joining
       const { data } = await axios.post(
-        `http://localhost:5000/api/rooms/join/${room._id}`,
+        `https://chat-app-lc2w.onrender.com/api/rooms/join/${room._id}`,
         { password: passwordInput },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -94,7 +95,7 @@ export default function Sidebar({ selectedRoom, setSelectedRoom }) {
     if (!joiningRoom) return;
     try {
       const { data } = await axios.post(
-        `http://localhost:5000/api/rooms/join/${joiningRoom._id}`,
+        `https://chat-app-lc2w.onrender.com/api/rooms/join/${joiningRoom._id}`,
         { password: passwordInput },
         { headers: { Authorization: `Bearer ${token}` } }
       );

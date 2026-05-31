@@ -60,7 +60,7 @@ export default function ChatWindow({ selectedRoom, setSelectedRoom }) {
   const fetchMembers = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5000/api/rooms/members/${selectedRoom._id}`,
+        `https://chat-app-lc2w.onrender.com/api/rooms/members/${selectedRoom._id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setMembers(data);

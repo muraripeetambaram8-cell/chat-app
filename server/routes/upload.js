@@ -32,7 +32,7 @@ const upload = multer({ storage, fileFilter, limits: { fileSize: 5 * 1024 * 1024
 // Upload route
 router.post('/', auth, upload.single('file'), (req, res) => {
   if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
-  const fileUrl = `http://localhost:5000/uploads/${req.file.filename}`;
+  const fileUrl = `https://chat-app-lc2w.onrender.com/uploads/${req.file.filename}`;
   res.json({ url: fileUrl, filename: req.file.originalname, mimetype: req.file.mimetype });
 });
 

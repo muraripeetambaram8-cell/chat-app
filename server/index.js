@@ -12,16 +12,23 @@ const socketHandler = require('./socket/socketHandler');
 
 const app = express();
 const server = http.createServer(app);
+
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://chat-o0hlz8rrg-muraripeetambaram8-cells-projects.vercel.app',
+  'https://chat-8qr6bdx2z-muraripeetambaram8-cells-projects.vercel.app',
+  'https://chat-app-lc2w.onrender.com'
+];
+
 const io = new Server(server, {
-  cors: { origin: ['http://localhost:3000', 'https://chat-app-xxxx.vercel.app'], methods: ['GET', 'POST'] }
+  cors: { origin: allowedOrigins, methods: ['GET', 'POST'] }
 });
 
-// Connect MongoDB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected!'))
   .catch(err => console.log('MongoDB error:', err));
 
-app.use(cors({ origin: ['http://localhost:3000', 'https://chat-app-xxxx.vercel.app'] }));
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
@@ -32,6 +39,6 @@ app.use('/api/upload', require('./routes/upload'));
 
 socketHandler(io);
 
-server.listen(process.env.PORT, () => {
-  console.log(`Server running on port ${process.env.PORT}`);
+server.listen(process.env.PORT || 5000, () => {
+  console.log(`Server running on port ${process.env.PORT || 5000}`);
 });

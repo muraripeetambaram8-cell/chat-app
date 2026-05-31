@@ -21,14 +21,18 @@ const allowedOrigins = [
 ];
 
 const io = new Server(server, {
-  cors: { origin: allowedOrigins, methods: ['GET', 'POST'] }
+  cors: { origin: '*', methods: ['GET', 'POST'] }
 });
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected!'))
   .catch(err => console.log('MongoDB error:', err));
 
-app.use(cors({ origin: allowedOrigins }));
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 

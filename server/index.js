@@ -13,7 +13,7 @@ const socketHandler = require('./socket/socketHandler');
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: { origin: 'http://localhost:3000', methods: ['GET', 'POST'] }
+  cors: { origin: ['http://localhost:3000', 'https://chat-app-xxxx.vercel.app'], methods: ['GET', 'POST'] }
 });
 
 // Connect MongoDB
@@ -21,7 +21,7 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected!'))
   .catch(err => console.log('MongoDB error:', err));
 
-app.use(cors());
+app.use(cors({ origin: ['http://localhost:3000', 'https://chat-app-xxxx.vercel.app'] }));
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 

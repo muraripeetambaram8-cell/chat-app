@@ -46,7 +46,9 @@ app.use('/api/messages', messageRoutes);
 app.use('/api/upload', require('./routes/upload'));
 
 socketHandler(io);
-
+setInterval(() => {
+  console.log('keepalive');
+}, 14 * 60 * 1000);
 server.listen(process.env.PORT || 5000, () => {
   console.log(`Server running on port ${process.env.PORT || 5000}`);
 });

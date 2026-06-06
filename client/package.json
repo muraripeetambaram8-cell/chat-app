@@ -1,4 +1,5 @@
 {
+  "proxy": "https://chat-app-lc2w.onrender.com",
   "name": "client",
   "version": "0.1.0",
   "private": true,
